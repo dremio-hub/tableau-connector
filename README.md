@@ -14,7 +14,7 @@ To test the connector in development, see https://tableau.github.io/connector-pl
 To package the driver for shipment, see https://tableau.github.io/connector-plugin-sdk/docs/package-sign<br/>
 To manually sign the file, you can package the file as unsigned and then run:<br/>
 ```
-jarsigner -keystore NONE -storetype PKCS11 -tsa http://tsa.starfieldtech.com -providerClass sun.security.pkcs11.SunPKCS11 -providerArg <dir>/pkcs11.cfg packaged-connector/dremio.taco 'Certificate for Digital Signature' -certchain fullchain.pem
+jarsigner -keystore NONE -storetype PKCS11 -tsa <tsaUrl> -providerClass sun.security.pkcs11.SunPKCS11 -providerArg <dir>/pkcs11.cfg packaged-connector/dremio.taco 'Certificate for Digital Signature' -certchain fullchain.pem
 ```
 
 Additional information, including samples, can be found at https://github.com/tableau/connector-plugin-sdk 
