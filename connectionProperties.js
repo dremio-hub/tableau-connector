@@ -1,6 +1,5 @@
 (function propertiesbuilder(attr) {
-    // Set connection properties from existing attributes.
-    var props = [];
+    var props = {};
     props["user"] = attr[connectionHelper.attributeUsername];
     props["password"] = attr[connectionHelper.attributePassword];
 
