@@ -77,16 +77,6 @@
         <formula>CAST(FLOOR(%1) AS BIGINT)</formula>
          <argument type="int" />
       </function>
-      <!--<function group="numeric" name="HEXBINX" return-type="real">
-         <formula>(((CASE WHEN (ABS((%2) - (CAST( ( (%2) / SQRT(3.0) ) AS NUMERIC(18, 0) ) * SQRT(3.0)))) + SQRT(3.0) * ((ABS((%1) - (CAST( ( (%1) / 3.0 ) AS NUMERIC(18, 0) ) * 3.0))) - 1.0) &gt; 0.0 THEN 1.5 ELSE 0.0 END) - (CASE WHEN ((%1) - (CAST( ( (%1) / 3.0 ) AS NUMERIC(18, 0) ) * 3.0) &lt; 0.0) AND ((CASE WHEN (ABS((%2) - (CAST( ( (%2) / SQRT(3.0) ) AS NUMERIC(18, 0) ) * SQRT(3.0)))) + SQRT(3.0) * ((ABS((%1) - (CAST( ( (%1) / 3.0 ) AS NUMERIC(18, 0) ) * 3.0))) - 1.0) &gt; 0.0 THEN 1.5 ELSE 0.0 END) &gt; 0.0) THEN 3.0 ELSE 0.0 END)) + (CAST( ( (%1) / 3.0 ) AS NUMERIC(18, 0) ) * 3.0))</formula>
-         <argument type="real" />
-         <argument type="real" />
-      </function>
-      <function group="numeric" name="HEXBINY" return-type="real">
-         <formula>CAST( (((CASE WHEN (ABS((%2) - (CAST( ( (%2) / SQRT(3.0) ) AS NUMERIC(18, 0) ) * SQRT(3.0)))) + SQRT(3.0) * ((ABS((%1) - (CAST( ( (%1) / 3.0 ) AS NUMERIC(18, 0) ) * 3.0))) - 1.0) &gt; 0.0 THEN SQRT(3.0) / 2.0 ELSE 0.0 END) - (CASE WHEN ((%2) - (CAST( ( (%2) / SQRT(3.0) ) AS NUMERIC(18, 0) ) * SQRT(3.0)) &lt; 0.0) AND ((CASE WHEN (ABS((%2) - (CAST( ( (%2) / SQRT(3.0) ) AS NUMERIC(18, 0) ) * SQRT(3.0)))) + SQRT(3.0) * ((ABS((%1) - (CAST( ( (%1) / 3.0 ) AS NUMERIC(18, 0) ) * 3.0))) - 1.0) &gt; 0.0 THEN SQRT(3.0) / 2.0 ELSE 0.0 END) &gt; 0.0) THEN SQRT(3.0) ELSE 0.0 END)) + (CAST( ( (%2) / SQRT(3.0) ) AS NUMERIC(18, 0) ) * SQRT(3.0))) AS NUMERIC(18,3) )</formula>
-         <argument type="real" />
-         <argument type="real" />
-      </function> -->
       <function group="numeric" name="LN" return-type="real">
          <formula>(CASE WHEN %1 &gt; 0 THEN LN(%1) ELSE NULL END)</formula>
          <argument type="real" />
@@ -111,7 +101,7 @@
          <argument type="real" />
       </function>
       <function group="numeric" name="MAX" return-type="int">
-        <formula>CASE WHEN %1 IS NULL OR %2 IS NULL THEN NULL WHEN %1 &gt; %2 THEN %1 ELSE %2 END</formula>
+         <formula>CASE WHEN %1 IS NULL OR %2 IS NULL THEN NULL WHEN %1 &gt; %2 THEN %1 ELSE %2 END</formula>
          <argument type="int" />
          <argument type="int" />
       </function>
@@ -239,7 +229,7 @@
          <argument type="str" />
       </function>
       <function group="string" name="MAX" return-type="str">
-        <formula>CASE WHEN %1 IS NULL OR %2 IS NULL THEN NULL ELSE CASE WHEN %1 &gt; %2 THEN %1 ELSE %2 END END</formula>
+         <formula>CASE WHEN %1 IS NULL OR %2 IS NULL THEN NULL ELSE CASE WHEN %1 &gt; %2 THEN %1 ELSE %2 END END</formula>
          <argument type="str" />
          <argument type="str" />
       </function>
@@ -255,7 +245,7 @@
          <argument type="real" />
       </function>
       <function group="string" name="MIN" return-type="str">
-        <formula>CASE WHEN %1 &lt; %2 THEN %1 ELSE %2 END</formula>
+         <formula>CASE WHEN %1 IS NULL OR %2 IS NULL THEN NULL WHEN %1 &lt; %2 THEN %1 ELSE %2 END</formula>
          <argument type="str" />
          <argument type="str" />
       </function>
@@ -313,22 +303,22 @@
          <argument type="datetime" />
       </function>
       <function group="date" name="MAX" return-type="datetime">
-         <formula>CASE WHEN %1 &gt; %2 THEN %1 ELSE %2 END</formula>
+         <formula>CASE WHEN %1 IS NULL OR %2 IS NULL THEN NULL ELSE CASE WHEN %1 &gt; %2 THEN %1 ELSE %2 END END</formula>
          <argument type="datetime" />
          <argument type="datetime" />
       </function>
       <function group="date" name="MAX" return-type="date">
-         <formula>CASE WHEN %1 &gt; %2 THEN %1 ELSE %2 END</formula>
+         <formula>CASE WHEN %1 IS NULL OR %2 IS NULL THEN NULL ELSE CASE WHEN %1 &gt; %2 THEN %1 ELSE %2 END END</formula>
          <argument type="date" />
          <argument type="date" />
       </function>
       <function group="date" name="MIN" return-type="datetime">
-         <formula>CASE WHEN %1 &lt; %2 THEN %1 ELSE %2 END</formula>
+         <formula>CASE WHEN %1 IS NULL OR %2 IS NULL THEN NULL WHEN %1 &lt; %2 THEN %1 ELSE %2 END</formula>
          <argument type="datetime" />
          <argument type="datetime" />
       </function>
       <function group="date" name="MIN" return-type="date">
-         <formula>CASE WHEN %1 &lt; %2 THEN %1 ELSE %2 END</formula>
+         <formula>CASE WHEN %1 IS NULL OR %2 IS NULL THEN NULL WHEN %1 &lt; %2 THEN %1 ELSE %2 END</formula>
          <argument type="date" />
          <argument type="date" />
       </function>
@@ -760,7 +750,7 @@
          <argument type='str' />
        </function>
        <function group='operator' name='+' return-type='datetime'>
-         <formula>TIMESTAMPADD(SQL_TSI_DAY, CAST(%2 AS INT), %1)</formula>
+         <formula>TIMESTAMPADD(SQL_TSI_SECOND, CAST(%2 * 86400 AS INT), %1)</formula>
          <argument type='datetime' />
          <argument type='real' />
        </function>
@@ -770,7 +760,7 @@
          <argument type='int' />
        </function>
        <function group='operator' name='+' return-type='date'>
-         <formula>DATE_ADD(%1, CAST(%2 AS INT))</formula>
+         <formula>TIMESTAMPADD(SQL_TSI_SECOND, CAST(%2 * 86400 AS INT), %1)</formula>
          <argument type='date' />
          <argument type='real' />
        </function>
@@ -808,17 +798,17 @@
          <argument type='int' />
        </function>
        <function group='operator' name='-' return-type='datetime'>
-         <formula>TIMESTAMPADD(SQL_TSI_DAY, CAST(-%2 AS INT), %1)</formula>
+         <formula>TIMESTAMPADD(SQL_TSI_SECOND, CAST(-%2 * 86400 AS INT), %1)</formula>
          <argument type='datetime' />
          <argument type='real' />
        </function>
        <function group='operator' name='-' return-type='datetime'>
-        <formula>TIMESTAMPADD(SQL_TSI_DAY, CAST(-%2 AS INT), %1)</formula>
+         <formula>TIMESTAMPADD(SQL_TSI_DAY, CAST(-%2 AS INT), %1)</formula>
          <argument type='datetime' />
          <argument type='int' />
        </function>
        <function group='operator' name='-' return-type='date'>
-         <formula>DATE_ADD(%1, CAST(-%2 AS INT))</formula>
+         <formula>TIMESTAMPADD(SQL_TSI_SECOND, CAST(-%2 * 86400 AS INT), %1)</formula>
          <argument type='date' />
          <argument type='real' />
        </function>
@@ -1117,13 +1107,28 @@
        </date-function>
        <date-function name='DATETRUNC' return-type='datetime'>
          <formula>DATE_TRUNC(&apos;%1&apos;, %2)</formula>
+         <formula part='quarter'>DATE_TRUNC(&apos;QUARTER&apos;, %2)</formula>
          <argument type='localstr' />
          <argument type='datetime' />
        </date-function>
        <date-function name='DATETRUNC' return-type='datetime'>
          <formula>DATE_TRUNC(&apos;%1&apos;, %2)</formula>
+         <formula part='quarter'>DATE_TRUNC(&apos;QUARTER&apos;, %2)</formula>
          <argument type='localstr' />
          <argument type='datetime' />
+         <argument type='localstr' />
+       </date-function>
+       <date-function name='DATETRUNC' return-type='datetime'>
+         <formula>DATE_TRUNC(&apos;%1&apos;, %2)</formula>
+         <formula part='quarter'>DATE_TRUNC(&apos;QUARTER&apos;, %2)</formula>
+         <argument type='localstr' />
+         <argument type='date' />
+       </date-function>
+       <date-function name='DATETRUNC' return-type='datetime'>
+         <formula>DATE_TRUNC(&apos;%1&apos;, %2)</formula>
+         <formula part='quarter'>DATE_TRUNC(&apos;QUARTER&apos;, %2)</formula>
+         <argument type='localstr' />
+         <argument type='date' />
          <argument type='localstr' />
        </date-function>
    </function-map>
