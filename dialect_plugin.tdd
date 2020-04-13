@@ -759,7 +759,7 @@
          <argument type='datetime' />
          <argument type='int' />
        </function>
-       <function group='operator' name='+' return-type='date'>
+       <function group='operator' name='+' return-type='datetime'>
          <formula>TIMESTAMPADD(SQL_TSI_SECOND, CAST(%2 * 86400 AS INT), %1)</formula>
          <argument type='date' />
          <argument type='real' />
@@ -807,7 +807,7 @@
          <argument type='datetime' />
          <argument type='int' />
        </function>
-       <function group='operator' name='-' return-type='date'>
+       <function group='operator' name='-' return-type='datetime'>
          <formula>TIMESTAMPADD(SQL_TSI_SECOND, CAST(-%2 * 86400 AS INT), %1)</formula>
          <argument type='date' />
          <argument type='real' />
@@ -817,12 +817,12 @@
          <argument type='date' />
          <argument type='int' />
        </function>
-       <function group='operator' name='-' return-type='datetime'>
+       <function group='operator' name='-' return-type='real'>
          <formula>(TIMESTAMPDIFF(SQL_TSI_SECOND, %2, %1) / 86400.0)</formula>
          <argument type='date' />
          <argument type='datetime' />
        </function>
-       <function group='operator' name='-' return-type='datetime'>
+       <function group='operator' name='-' return-type='real'>
          <formula>(TIMESTAMPDIFF(SQL_TSI_SECOND, %2, %1) / 86400.0)</formula>
          <argument type='datetime' />
          <argument type='date' />
