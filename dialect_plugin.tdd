@@ -121,7 +121,7 @@
          <argument type="int" />
       </function>
       <function group="numeric" name="PI" return-type="real">
-         <formula>CAST(PI as DECIMAL(38, 7))</formula>
+         <formula>CAST(4.0 * ATAN(1) as DECIMAL(38, 7))</formula>
       </function>
       <function group="numeric" name="POWER" return-type="real">
          <formula>POWER(%1,%2)</formula>
@@ -1001,9 +1001,21 @@
          <formula part='year'>(EXTRACT(YEAR FROM %3) - EXTRACT(YEAR FROM %2))</formula>
          <formula part='quarter'>((EXTRACT(YEAR FROM %3) - EXTRACT(YEAR FROM %2)) * 4 + CEIL(EXTRACT(MONTH FROM %3) / 3.0) - CEIL(EXTRACT(MONTH FROM %2) / 3.0))</formula>
          <formula part='month'>((EXTRACT(YEAR FROM %3) - EXTRACT(YEAR FROM %2)) * 12 + (EXTRACT(MONTH FROM %3) - EXTRACT(MONTH FROM %2)))</formula>
-         <formula part='dayofyear'>TIMESTAMPDIFF('day', %2, %3)</formula>
+         <formula part='dayofyear'>TIMESTAMPDIFF(SQL_TSI_DAY, %2, %3)</formula>
          <formula part='weekday'>CAST(CAST(%3 AS DATE) - CAST(%2 AS DATE) AS INTEGER)</formula>
          <formula part='week'>((EXTRACT(DAY FROM %3 - %2) / 7) + CASE WHEN EXTRACT(DOW FROM %3) &lt; EXTRACT(DOW FROM %2) THEN 1 ELSE 0 END - CASE WHEN %3 &lt; %2 THEN 1 ELSE 0 END)</formula>
+         <argument type='localstr' />
+         <argument type='date' />
+         <argument type='datetime' />
+       </date-function>
+       <date-function name='DATEDIFF' return-type='int'>
+         <formula>TIMESTAMPDIFF(%1, %2, %3)</formula>
+         <formula part='year'>(EXTRACT(YEAR FROM %3) - EXTRACT(YEAR FROM %2))</formula>
+         <formula part='quarter'>((EXTRACT(YEAR FROM %3) - EXTRACT(YEAR FROM %2)) * 4 + CEIL(EXTRACT(MONTH FROM %3) / 3.0) - CEIL(EXTRACT(MONTH FROM %2) / 3.0))</formula>
+         <formula part='month'>((EXTRACT(YEAR FROM %3) - EXTRACT(YEAR FROM %2)) * 12 + (EXTRACT(MONTH FROM %3) - EXTRACT(MONTH FROM %2)))</formula>
+         <formula part='dayofyear'>TIMESTAMPDIFF('day', %2, %3)</formula>
+         <formula part='weekday'>CAST(CAST(%3 AS DATE) - CAST(%2 AS DATE) AS INTEGER)</formula>
+         <formula part='week'>((EXTRACT(DAY FROM (%3 - %2)) - (EXTRACT(DOW FROM %3) % 7) + (EXTRACT(DOW FROM %2) % 7)) / 7)</formula>
          <argument type='localstr' />
          <argument type='datetime' />
          <argument type='datetime' />
@@ -1016,7 +1028,7 @@
          <formula part='month'>((EXTRACT(YEAR FROM %3) - EXTRACT(YEAR FROM %2)) * 12 + (EXTRACT(MONTH FROM %3) - EXTRACT(MONTH FROM %2)))</formula>
          <formula part='dayofyear'>TIMESTAMPDIFF(SQL_TSI_DAY, %2, %3)</formula>
          <formula part='weekday'>CAST(CAST(%3 AS DATE) - CAST(%2 AS DATE) AS INTEGER)</formula>
-         <formula part='week'>((EXTRACT(DAY FROM %3 - %2) / 7) + CASE WHEN EXTRACT(DOW FROM %3) &lt; EXTRACT(DOW FROM %2) THEN 1 ELSE 0 END - CASE WHEN %3 &lt; %2 THEN 1 ELSE 0 END)</formula>
+         <formula part='week'>((EXTRACT(DAY FROM (%3 - %2)) - (EXTRACT(DOW FROM %3) % 7) + (EXTRACT(DOW FROM %2) % 7)) / 7)</formula>
          <argument type='localstr' />
          <argument type='date' />
          <argument type='date' />
@@ -1026,9 +1038,21 @@
          <formula part='month'>(EXTRACT(YEAR FROM %3) - EXTRACT(YEAR FROM %2))</formula>
          <formula part='quarter'>((EXTRACT(YEAR FROM %3) - EXTRACT(YEAR FROM %2)) * 4 + CEIL(EXTRACT(MONTH FROM %3) / 3.0) - CEIL(EXTRACT(MONTH FROM %2) / 3.0))</formula>
          <formula part='month'>((EXTRACT(YEAR FROM %3) - EXTRACT(YEAR FROM %2)) * 12 + (EXTRACT(MONTH FROM %3) - EXTRACT(MONTH FROM %2)))</formula>
+         <formula part='dayofyear'>TIMESTAMPDIFF(SQL_TSI_DAY, %2, %3)</formula>
+         <formula part='weekday'>CAST(CAST(%3 AS DATE) - CAST(%2 AS DATE) AS INTEGER)</formula>
+         <formula part='week'>((EXTRACT(DAY FROM (%3 - %2)) - (EXTRACT(DOW FROM %3) % 7) + (EXTRACT(DOW FROM %2) % 7)) / 7)</formula>
+         <argument type='localstr' />
+         <argument type='date' />
+         <argument type='datetime' />
+       </date-function>
+       <date-function name='DATEDIFF' return-type='int'>
+         <formula>TIMESTAMPDIFF(%1, %2, %3)</formula>
+         <formula part='month'>(EXTRACT(YEAR FROM %3) - EXTRACT(YEAR FROM %2))</formula>
+         <formula part='quarter'>((EXTRACT(YEAR FROM %3) - EXTRACT(YEAR FROM %2)) * 4 + CEIL(EXTRACT(MONTH FROM %3) / 3.0) - CEIL(EXTRACT(MONTH FROM %2) / 3.0))</formula>
+         <formula part='month'>((EXTRACT(YEAR FROM %3) - EXTRACT(YEAR FROM %2)) * 12 + (EXTRACT(MONTH FROM %3) - EXTRACT(MONTH FROM %2)))</formula>
          <formula part='dayofyear'>TIMESTAMPDIFF('day', %2, %3)</formula>
          <formula part='weekday'>CAST(CAST(%3 AS DATE) - CAST(%2 AS DATE) AS INTEGER)</formula>
-         <formula part='week'>((EXTRACT(DAY FROM %3 - %2) / 7) + CASE WHEN EXTRACT(DOW FROM %3) &lt; EXTRACT(DOW FROM %2) THEN 1 ELSE 0 END - CASE WHEN %3 &lt; %2 THEN 1 ELSE 0 END)</formula>
+         <formula part='week'>((EXTRACT(DAY FROM (%3 - %2)) - (EXTRACT(DOW FROM %3) % 7) + (EXTRACT(DOW FROM %2) % 7)) / 7)</formula>
          <argument type='localstr' />
          <argument type='date' />
          <argument type='date' />
@@ -1055,7 +1079,7 @@
          <formula part='dayofyear'>LTRIM(CAST(DAYOFYEAR(%2) AS VARCHAR))</formula>
          <formula part='day'>LTRIM(CAST(DAYOFMONTH(%2) AS VARCHAR))</formula>
          <formula part='weekday'>TO_CHAR(%2, 'DAY')</formula>
-         <formula part='week'>LTRIM(CAST(CASE WHEN EXTRACT(DOW FROM %2) &lt; EXTRACT(DOW FROM DATE_TRUNC('YEAR', %2)) THEN 1 ELSE 0 END + ((EXTRACT(DOY FROM %2) + 6) / 7) AS VARCHAR))</formula>
+         <formula part='week'>LTRIM(CAST(CASE WHEN EXTRACT(DOW FROM %2) &lt; EXTRACT(DOW FROM DATE_TRUNC('YEAR', %2)) THEN 1 ELSE 0 END + ((EXTRACT(DOY FROM %2) + 6) / 7) - CASE WHEN EXTRACT(DOW FROM %2) &lt; %3 THEN 1 ELSE 0 END AS VARCHAR))</formula>
          <formula part='hour'>LTRIM(CAST(HOUR(%2) AS VARCHAR))</formula>
          <formula part='minute'>LTRIM(CAST(MINUTE(%2) AS VARCHAR))</formula>
          <formula part='second'>LTRIM(CAST(SECOND(%2) AS VARCHAR))</formula>
@@ -1084,7 +1108,7 @@
          <formula part='dayofyear'>LTRIM(CAST(DAYOFYEAR(%2) AS VARCHAR))</formula>
          <formula part='day'>LTRIM(CAST(DAYOFMONTH(%2) AS VARCHAR))</formula>
          <formula part='weekday'>TO_CHAR(%2, 'DAY')</formula>
-         <formula part='week'>LTRIM(CAST(CASE WHEN EXTRACT(DOW FROM %2) &lt; EXTRACT(DOW FROM DATE_TRUNC('YEAR', %2)) THEN 1 ELSE 0 END + ((EXTRACT(DOY FROM %2) + 6) / 7) AS VARCHAR))</formula>
+         <formula part='week'>LTRIM(CAST(CASE WHEN EXTRACT(DOW FROM %2) &lt; EXTRACT(DOW FROM DATE_TRUNC('YEAR', %2)) THEN 1 ELSE 0 END + ((EXTRACT(DOY FROM %2) + 6) / 7) - CASE WHEN EXTRACT(DOW FROM %2) &lt; %3 THEN 1 ELSE 0 END AS VARCHAR))</formula>
          <formula part='hour'>LTRIM(CAST(HOUR(CAST(%2 AS TIMESTAMP)) AS VARCHAR))</formula>
          <formula part='minute'>LTRIM(CAST(MINUTE(CAST(%2 AS TIMESTAMP)) AS VARCHAR))</formula>
          <formula part='second'>LTRIM(CAST(SECOND(CAST(%2 AS TIMESTAMP)) AS VARCHAR))</formula>
@@ -1094,13 +1118,13 @@
        </date-function>
        <date-function name='DATEPART' return-type='int'>
          <formula>DATE_PART(&apos;%1&apos;, %2)</formula>
-         <formula part='week'>(CASE WHEN EXTRACT(DOW FROM %2) &lt; EXTRACT(DOW FROM DATE_TRUNC('YEAR', %2)) THEN 1 ELSE 0 END + ((EXTRACT(DOY FROM %2) + 6) / 7))</formula>
+         <formula part='week'>(CASE WHEN EXTRACT(DOW FROM %2) &lt; EXTRACT(DOW FROM DATE_TRUNC(&apos;YEAR&apos;, %2)) THEN 1 ELSE 0 END + ((EXTRACT(DOY FROM %2) + 6) / 7))</formula>
          <argument type='localstr' />
          <argument type='datetime' />
        </date-function>
        <date-function name='DATEPART' return-type='int'>
          <formula>DATE_PART(&apos;%1&apos;, %2)</formula>
-         <formula part='week'>(CASE WHEN EXTRACT(DOW FROM %2) &lt; EXTRACT(DOW FROM DATE_TRUNC('YEAR', %2)) THEN 1 ELSE 0 END + ((EXTRACT(DOY FROM %2) + 6) / 7))</formula>
+         <formula part='week'>(CASE WHEN EXTRACT(DOW FROM %2) &lt; EXTRACT(DOW FROM DATE_TRUNC(&apos;YEAR&apos;, %2)) THEN 1 ELSE 0 END + ((EXTRACT(DOY FROM %2) + 6) / 7)) - CASE WHEN EXTRACT(DOW FROM %2) &lt; %3 THEN 1 ELSE 0 END</formula>
          <argument type='localstr' />
          <argument type='datetime' />
          <argument type='localstr' />
@@ -1108,12 +1132,14 @@
        <date-function name='DATETRUNC' return-type='datetime'>
          <formula>DATE_TRUNC(&apos;%1&apos;, %2)</formula>
          <formula part='quarter'>DATE_TRUNC(&apos;QUARTER&apos;, %2)</formula>
+         <formula part='week'>DATE_TRUNC(&apos;DAY&apos;, DATE_ADD(%2, -DATE_PART(&apos;DOW&apos;, %2) + 1))</formula>
          <argument type='localstr' />
          <argument type='datetime' />
        </date-function>
        <date-function name='DATETRUNC' return-type='datetime'>
          <formula>DATE_TRUNC(&apos;%1&apos;, %2)</formula>
          <formula part='quarter'>DATE_TRUNC(&apos;QUARTER&apos;, %2)</formula>
+         <formula part='week'>DATE_TRUNC(&apos;DAY&apos;, DATE_ADD(%2, -DATE_PART(&apos;DOW&apos;, %2) + %3 + CASE WHEN DATE_PART(&apos;DOW&apos;, %2) &lt;= %3 THEN -6 ELSE 1 END))</formula>
          <argument type='localstr' />
          <argument type='datetime' />
          <argument type='localstr' />
@@ -1121,12 +1147,14 @@
        <date-function name='DATETRUNC' return-type='datetime'>
          <formula>DATE_TRUNC(&apos;%1&apos;, %2)</formula>
          <formula part='quarter'>DATE_TRUNC(&apos;QUARTER&apos;, %2)</formula>
+         <formula part='week'>DATE_TRUNC(&apos;DAY&apos;, DATE_ADD(%2, -DATE_PART(&apos;DOW&apos;, %2) + 1))</formula>
          <argument type='localstr' />
          <argument type='date' />
        </date-function>
        <date-function name='DATETRUNC' return-type='datetime'>
          <formula>DATE_TRUNC(&apos;%1&apos;, %2)</formula>
          <formula part='quarter'>DATE_TRUNC(&apos;QUARTER&apos;, %2)</formula>
+         <formula part='week'>DATE_TRUNC(&apos;DAY&apos;, DATE_ADD(%2, -DATE_PART(&apos;DOW&apos;, %2) + %3 + CASE WHEN DATE_PART(&apos;DOW&apos;, %2) &lt;= %3 THEN -6 ELSE 1 END))</formula>
          <argument type='localstr' />
          <argument type='date' />
          <argument type='localstr' />
