@@ -11,6 +11,7 @@
     <driver name="Dremio Connector"/>
     <customizations>
       <customization name="CAP_CREATE_TEMP_TABLES" value="no"/>
+      <customization name="CAP_AUTH_DB_IMPERSONATE" value="yes"/>
       <customization name="CAP_DB_IMPERSONATE" value="yes"/>
       <customization name="CAP_FAST_METADATA" value="no"/>
       <customization name="CAP_QUERY_BOOL_IDENTIFIER_TO_LOGICAL" value="yes"/>
