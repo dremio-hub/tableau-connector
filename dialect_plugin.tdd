@@ -82,7 +82,7 @@
          <argument type="real" />
       </function>
       <function group="numeric" name="LOG" return-type="real">
-         <formula>CASE WHEN %1 &gt; 0 THEN LOG(10,%1) ELSE NULL END</formula>
+         <formula>CASE WHEN %1 &gt; 0 THEN LOG10(%1) ELSE NULL END</formula>
          <argument type="real" />
       </function>
       <function group="numeric" name="LOG" return-type="real">
@@ -191,7 +191,7 @@
          <argument type="real" />
       </function>
       <function group="string" name="CONTAINS" return-type="bool">
-         <formula>CASE WHEN %1 IS NULL THEN FALSE ELSE CASE WHEN CHAR_LENGTH(%2) = 0 THEN 1 ELSE POSITION(%2 in %1) END &gt; 0 END</formula>
+         <formula>(CASE WHEN CHAR_LENGTH(%2) = 0 THEN 1 ELSE POSITION(%2 in %1) END &gt; 0)</formula>
          <argument type="str" />
          <argument type="str" />
       </function>
@@ -1061,10 +1061,10 @@
        <date-function name='DATENAME' return-type='str'>
          <formula part='year'>LTRIM(CAST(YEAR(%2) AS VARCHAR))</formula>
          <formula part='quarter'>LTRIM(CAST(FLOOR((MONTH(%2) - 1) / 3.0 + 1) AS VARCHAR))</formula>
-         <formula part='month'>TO_CHAR(%2, 'MONTH')</formula>
+         <formula part='month'>RTRIM(CAST(TO_CHAR(%2, 'MONTH') AS VARCHAR))</formula>
          <formula part='dayofyear'>LTRIM(CAST(DAYOFYEAR(%2) AS VARCHAR))</formula>
-         <formula part='day'>LTRIM(CAST(DAYOFMONTH(%2) AS VARCHAR))</formula>
-         <formula part='weekday'>TO_CHAR(%2, 'DAY')</formula>
+         <formula part='day'>RTRIM(CAST(DAYOFMONTH(%2) AS VARCHAR))</formula>
+         <formula part='weekday'>RTRIM(CAST(TO_CHAR(%2, 'DAY') AS VARCHAR))</formula>
          <formula part='week'>LTRIM(CAST(CASE WHEN EXTRACT(DOW FROM %2) &lt; EXTRACT(DOW FROM DATE_TRUNC('YEAR', %2)) THEN 1 ELSE 0 END + ((EXTRACT(DOY FROM %2) + 6) / 7) AS VARCHAR))</formula>
          <formula part='hour'>LTRIM(CAST(HOUR(%2) AS VARCHAR))</formula>
          <formula part='minute'>LTRIM(CAST(MINUTE(%2) AS VARCHAR))</formula>
@@ -1075,10 +1075,10 @@
        <date-function name='DATENAME' return-type='str'>
          <formula part='year'>LTRIM(CAST(YEAR(%2) AS VARCHAR))</formula>
          <formula part='quarter'>LTRIM(CAST(FLOOR((MONTH(%2) - 1) / 3.0 + 1) AS VARCHAR))</formula>
-         <formula part='month'>TO_CHAR(%2, 'MONTH')</formula>
+         <formula part='month'>RTRIM(CAST(TO_CHAR(%2, 'MONTH') AS VARCHAR))</formula>
          <formula part='dayofyear'>LTRIM(CAST(DAYOFYEAR(%2) AS VARCHAR))</formula>
-         <formula part='day'>LTRIM(CAST(DAYOFMONTH(%2) AS VARCHAR))</formula>
-         <formula part='weekday'>TO_CHAR(%2, 'DAY')</formula>
+         <formula part='day'>RTRIM(CAST(DAYOFMONTH(%2) AS VARCHAR))</formula>
+         <formula part='weekday'>RTRIM(CAST(TO_CHAR(%2, 'DAY') AS VARCHAR))</formula>
          <formula part='week'>LTRIM(CAST(CASE WHEN EXTRACT(DOW FROM %2) &lt; EXTRACT(DOW FROM DATE_TRUNC('YEAR', %2)) THEN 1 ELSE 0 END + ((EXTRACT(DOY FROM %2) + 6) / 7) - CASE WHEN EXTRACT(DOW FROM %2) &lt; %3 THEN 1 ELSE 0 END AS VARCHAR))</formula>
          <formula part='hour'>LTRIM(CAST(HOUR(%2) AS VARCHAR))</formula>
          <formula part='minute'>LTRIM(CAST(MINUTE(%2) AS VARCHAR))</formula>
@@ -1090,10 +1090,10 @@
        <date-function name='DATENAME' return-type='str'>
          <formula part='year'>LTRIM(CAST(YEAR(%2) AS VARCHAR))</formula>
          <formula part='quarter'>LTRIM(CAST(FLOOR((MONTH(%2) - 1) / 3.0 + 1) AS VARCHAR))</formula>
-         <formula part='month'>TO_CHAR(%2, 'MONTH')</formula>
+         <formula part='month'>RTRIM(CAST(TO_CHAR(%2, 'MONTH') AS VARCHAR))</formula>
          <formula part='dayofyear'>LTRIM(CAST(DAYOFYEAR(%2) AS VARCHAR))</formula>
-         <formula part='day'>LTRIM(CAST(DAYOFMONTH(%2) AS VARCHAR))</formula>
-         <formula part='weekday'>TO_CHAR(%2, 'DAY')</formula>
+         <formula part='day'>RTRIM(CAST(DAYOFMONTH(%2) AS VARCHAR))</formula>
+         <formula part='weekday'>RTRIM(CAST(TO_CHAR(%2, 'DAY') AS VARCHAR))</formula>
          <formula part='week'>LTRIM(CAST(CASE WHEN EXTRACT(DOW FROM %2) &lt; EXTRACT(DOW FROM DATE_TRUNC('YEAR', %2)) THEN 1 ELSE 0 END + ((EXTRACT(DOY FROM %2) + 6) / 7) AS VARCHAR))</formula>
          <formula part='hour'>LTRIM(CAST(HOUR(CAST(%2 AS TIMESTAMP)) AS VARCHAR))</formula>
          <formula part='minute'>LTRIM(CAST(MINUTE(CAST(%2 AS TIMESTAMP)) AS VARCHAR))</formula>
@@ -1104,10 +1104,10 @@
        <date-function name='DATENAME' return-type='str'>
          <formula part='year'>LTRIM(CAST(YEAR(%2) AS VARCHAR))</formula>
          <formula part='quarter'>LTRIM(CAST(FLOOR((MONTH(%2) - 1) / 3.0 + 1) AS VARCHAR))</formula>
-         <formula part='month'>TO_CHAR(%2, 'MONTH')</formula>
+         <formula part='month'>RTRIM(CAST(TO_CHAR(%2, 'MONTH') AS VARCHAR))</formula>
          <formula part='dayofyear'>LTRIM(CAST(DAYOFYEAR(%2) AS VARCHAR))</formula>
-         <formula part='day'>LTRIM(CAST(DAYOFMONTH(%2) AS VARCHAR))</formula>
-         <formula part='weekday'>TO_CHAR(%2, 'DAY')</formula>
+         <formula part='day'>RTRIM(CAST(DAYOFMONTH(%2) AS VARCHAR))</formula>
+         <formula part='weekday'>RTRIM(CAST(TO_CHAR(%2, 'DAY') AS VARCHAR))</formula>
          <formula part='week'>LTRIM(CAST(CASE WHEN EXTRACT(DOW FROM %2) &lt; EXTRACT(DOW FROM DATE_TRUNC('YEAR', %2)) THEN 1 ELSE 0 END + ((EXTRACT(DOY FROM %2) + 6) / 7) - CASE WHEN EXTRACT(DOW FROM %2) &lt; %3 THEN 1 ELSE 0 END AS VARCHAR))</formula>
          <formula part='hour'>LTRIM(CAST(HOUR(CAST(%2 AS TIMESTAMP)) AS VARCHAR))</formula>
          <formula part='minute'>LTRIM(CAST(MINUTE(CAST(%2 AS TIMESTAMP)) AS VARCHAR))</formula>
@@ -1200,5 +1200,7 @@
          <local-type name='date' value='CAST(NULL AS DATE)' />
          <local-type name='datetime' value='CAST(NULL AS TIMESTAMP)' />
       </format-null>
+      <format-string-literal value='Standard' />
+      <start-of-week-offset value='1' />
    </sql-format>
 </dialect>
