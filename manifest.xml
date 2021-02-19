@@ -48,7 +48,7 @@
       <customization name="CAP_JDBC_QUERY_CANCEL" value="yes"/>
     </customizations>
   </connection-customization>
-  <connection-dialog file='connection-dialog.tcd'/>
+  <connection-fields   file='connection-fields.xml'/>
   <connection-resolver file="connectionResolver.tdr"/>
   <dialect file='dialect_plugin.tdd'/>
 </connector-plugin>

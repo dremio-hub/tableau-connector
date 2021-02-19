@@ -1,0 +1,41 @@
+<connection-fields>
+    <field name="server" label="Server" value-type="string" category="endpoint"/>
+
+    <field name="port" label="Port" value-type="string" category="endpoint" default-value="31010"/>
+
+    <field name="authentication" label="Authentication" category="authentication" value-type="selection" default-value="basic">
+        <selection-group>
+            <option value="basic" label="Username and Password"/>
+            <option value="oauth" label="OAuth"/>
+        </selection-group>
+    </field>
+
+    <field name="username" label="Username" category="authentication" value-type="string">
+        <conditions>
+            <condition field="authentication" value="basic"/>
+        </conditions>
+    </field>
+
+    <field name="password" label="Password" category="authentication" value-type="string" secure="true">
+        <conditions>
+            <condition field="authentication" value="basic"/>
+        </conditions>
+    </field>
+
+    <field name="sslmode" label="Require SSL (Recommended)" value-type="boolean" category="authentication" default-value="">
+        <boolean-options>
+            <false-value value=""/>
+            <true-value value="require"/>
+        </boolean-options>
+        <conditions>
+            <condition field="authentication" value="basic"/>
+        </conditions>
+    </field>
+
+    <field name="token" label="OAuth Refresh Token" value-type="string" category="authentication">
+        <conditions>
+            <condition field="authentication" value="oauth"/>
+        </conditions>
+    </field>
+
+</connection-fields>
