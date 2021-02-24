@@ -4,8 +4,24 @@
     }
 
     var props = {};
-    props["user"] = attr[connectionHelper.attributeUsername];
-    props["password"] = attr[connectionHelper.attributePassword];
+    var username = "";
+    var password = "";
+
+    var authMethod = attr[connectionHelper.attributeAuthentication];
+
+    if (authMethod == "basic") {
+        username = attr[connectionHelper.attributeUsername];
+        password = attr[connectionHelper.attributePassword];
+
+        if (attr["sslmode"] !== "") {
+            props["ssl"] = "true";
+        }
+    } else if (authMethod == "token-auth") {
+        password = attr[connectionHelper.attributeToken]
+    }
+
+    props["user"] = username;
+    props["password"] = password;
     
     if (attr["workgroup-auth-mode"] == "db-impersonate") {
         var str = attr[":workgroup-auth-user"];
@@ -19,10 +35,6 @@
                 props["impersonation_target"] = str;
             }
         }
-    }
-
-    if (attr["sslmode"] !== "") {
-        props["ssl"] = "true";
     }
 
     return props;
