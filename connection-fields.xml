@@ -4,7 +4,7 @@
     <field name="authentication" label="Authentication" category="authentication" value-type="selection" default-value="basic">
         <selection-group>
             <option value="basic" label="Username and Password"/>
-            <option value="token-auth" label="OAuth 2.0"/>
+            <option value="token-auth" label="OAuth"/>
         </selection-group>
     </field>
     <field name="username" label="Username" category="authentication" value-type="string">
@@ -26,7 +26,7 @@
             <true-value value="require"/>
         </boolean-options>
     </field>
-    <field name="token" label="OAuth Access Token" value-type="string" category="authentication">
+    <field name="password" label="OAuth Refresh Token" value-type="string" category="authentication">
         <conditions>
             <condition field="authentication" value="token-auth"/>
         </conditions>
