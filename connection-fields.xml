@@ -17,18 +17,15 @@
             <condition field="authentication" value="basic"/>
         </conditions>
     </field>
-    <field name="sslmode" label="Require SSL (Recommended)" value-type="boolean" category="authentication" default-value="">
+    <field name="password" label="OAuth Access Token" value-type="string" category="authentication" secure="true">
         <conditions>
-            <condition field="authentication" value="basic"/>
+            <condition field="authentication" value="token-auth"/>
         </conditions>
+    </field>
+    <field name="sslmode" label="Require SSL (Recommended)" value-type="boolean" category="authentication" default-value="">
         <boolean-options>
             <false-value value=""/>
             <true-value value="require"/>
         </boolean-options>
-    </field>
-    <field name="password" label="OAuth Refresh Token" value-type="string" category="authentication">
-        <conditions>
-            <condition field="authentication" value="token-auth"/>
-        </conditions>
     </field>
 </connection-fields>

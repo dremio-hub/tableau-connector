@@ -12,16 +12,16 @@
     if (authMethod == "basic") {
         username = attr[connectionHelper.attributeUsername];
         password = attr[connectionHelper.attributePassword];
-
-        if (attr["sslmode"] !== "") {
-            props["ssl"] = "true";
-        }
     } else if (authMethod == "token-auth") {
-        password = attr[connectionHelper.attributeToken]
+        password = attr[connectionHelper.attributeToken];
     }
 
     props["user"] = username;
     props["password"] = password;
+
+    if (attr["sslmode"] !== "") {
+        props["ssl"] = "true";
+    }
     
     if (attr["workgroup-auth-mode"] == "db-impersonate") {
         var str = attr[":workgroup-auth-user"];
