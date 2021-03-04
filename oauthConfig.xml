@@ -1,0 +1,51 @@
+<pluginOAuthConfig>
+    <!-- dbclass must correspond to the class registered in manifest.xml --> 
+    <dbclass>dremio</dbclass>
+    <!-- Subsitute these with your OAuth Client Id and Client Secret -->
+    <clientIdDesktop>[insert client id]</clientIdDesktop>
+    <clientSecretDesktop>[insert client secret]</clientSecretDesktop>
+    <!-- Desktop redirectUri, subsitute for your own registered desktop redirectUri --> 
+    <redirectUrisDesktop>http://localhost:9047/sso</redirectUrisDesktop>
+    <!-- authUri and tokenUri only contains the path since it has OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN on, so the final oauth endpoint will be 
+    your input instanceUrl + authUri/tokenUri -->
+    <authUri>/oauth2/v2.0/authorize</authUri>
+    <tokenUri>/oauth2/v2.0/token</tokenUri>
+    <!-- Add the scopes needed for OAuth flow
+    E.g. Snowflake need refresh_token scope to issue refresh tokens -->
+    <scopes>[insert scope]</scopes>
+    <!-- My Example OAuth Provider supports PKCE, Cutom domain, fixed callback url -->
+    <capabilities>
+        <entry>
+            <key>OAUTH_CAP_SUPPORTS_GET_USERINFO_FROM_ID_TOKEN</key>
+            <value>true</value>
+        </entry>
+        <entry>
+            <key>CAP_SUPPORTS_CUSTOM_DOMAIN</key>
+            <value>true</value>
+        </entry>
+        <entry>
+            <key>OAUTH_CAP_SUPPORTS_HTTP_SCHEME_LOOPBACK_REDIRECT_URLS</key>
+            <value>true</value>
+        </entry>
+        <entry>
+            <key>OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL</key>
+            <value>true</value>
+        </entry>
+    </capabilities>
+    <!-- Map Tableau recognized attr <key> to My Example OAuth Provider response attr <value> -->
+    <accessTokenResponseMaps>
+        <entry>
+            <key>ACCESSTOKEN</key>
+            <value>access_token</value>
+        </entry>
+        <entry>
+            <key>REFRESHTOKEN</key>
+            <value>refresh_token</value>
+        </entry>
+        <entry>
+            <key>access-token-expires-in</key>
+            <value>expires_in</value>
+        </entry>
+    </accessTokenResponseMaps>
+    <!-- No refreshTokenResponseMaps needed since that's same with the accessTokenResponseMaps -->
+ </pluginOAuthConfig>

@@ -12,8 +12,8 @@
     if (authMethod == "basic") {
         username = attr[connectionHelper.attributeUsername];
         password = attr[connectionHelper.attributePassword];
-    } else if (authMethod == "token-auth") {
-        password = attr[connectionHelper.attributeToken];
+    } else if (authMethod == "oauth") {
+        password = attr[ACCESSTOKEN]
     }
 
     props["user"] = username;

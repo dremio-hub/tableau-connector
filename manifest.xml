@@ -51,4 +51,5 @@
   <connection-fields   file='connection-fields.xml'/>
   <connection-resolver file="connectionResolver.tdr"/>
   <dialect file='dialect_plugin.tdd'/>
+  <oauth-config file='oauthConfig.xml'/>
 </connector-plugin>

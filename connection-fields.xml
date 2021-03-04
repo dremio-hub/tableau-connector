@@ -4,7 +4,7 @@
     <field name="authentication" label="Authentication" category="authentication" value-type="selection" default-value="basic">
         <selection-group>
             <option value="basic" label="Username and Password"/>
-            <option value="token-auth" label="OAuth"/>
+            <option value="oauth" label="OAuth"/>
         </selection-group>
     </field>
     <field name="username" label="Username" category="authentication" value-type="string">
@@ -17,15 +17,18 @@
             <condition field="authentication" value="basic"/>
         </conditions>
     </field>
-    <field name="password" label="OAuth Access Token" value-type="string" category="authentication" secure="true">
-        <conditions>
-            <condition field="authentication" value="token-auth"/>
-        </conditions>
-    </field>
     <field name="sslmode" label="Require SSL (Recommended)" value-type="boolean" category="authentication" default-value="">
+        <conditions>
+            <condition field="authentication" value="basic"/>
+        </conditions>
         <boolean-options>
             <false-value value=""/>
             <true-value value="require"/>
         </boolean-options>
+    </field>
+    <field name="instanceurl" label="OAuth Instance Url" value-type="string" category="authentication">
+        <conditions>
+          <condition field="authentication" value="oauth" />
+        </conditions>
     </field>
 </connection-fields>
