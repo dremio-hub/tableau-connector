@@ -18,15 +18,12 @@
         </conditions>
     </field>
     <field name="sslmode" label="Require SSL (Recommended)" value-type="boolean" category="authentication" default-value="">
-        <conditions>
-            <condition field="authentication" value="basic"/>
-        </conditions>
         <boolean-options>
             <false-value value=""/>
             <true-value value="require"/>
         </boolean-options>
     </field>
-    <field name="instanceurl" label="OAuth Instance Url" value-type="string" category="authentication">
+    <field name="instanceurl" label="Identity Provider URL" value-type="string" category="authentication">
         <conditions>
           <condition field="authentication" value="oauth" />
         </conditions>
