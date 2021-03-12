@@ -46,6 +46,7 @@
       <customization name="CAP_SUPPORTS_SPLIT_FROM_RIGHT" value="yes"/>
       <customization name="CAP_JDBC_QUERY_ASYNC" value="no"/>
       <customization name="CAP_JDBC_QUERY_CANCEL" value="yes"/>
+      <customization name="CAP_ESCAPE_UNDERSCORE_IN_NAMES" value="yes"/>
     </customizations>
   </connection-customization>
   <connection-dialog file='connection-dialog.tcd'/>
